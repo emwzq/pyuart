@@ -3,6 +3,25 @@
 
 import serial
 
+
+#打开串口
+def uart_open():
+    try:
+        Ser = serial.Serial("/dev/ttyUSB0",115200,timeout=1.0)
+        if Ser.isOpen():
+            print("open success")
+        else:
+            print("open failed")
+        return Ser
+    except:
+        print("Uart open failed");
+
+Uart = uart_open();
+
+####################################################################
+
+
+
 ###################################################
 #
 # 功 能: 将接收到的数据已hex显示
@@ -42,20 +61,6 @@ def int2byte(din):
         data = data // 256;
     return  (bytes(a[::-1]))
 
-#打开串口
-def uart_open():
-    try:
-        Ser = serial.Serial("/dev/ttyUSB0",115200,timeout=1.0)
-        if Ser.isOpen():
-            print("open success")
-        else:
-            print("open failed")
-        return Ser
-    except:
-        print("Uart open failed");
-
-####################################################################
-Uart = uart_open();
 
 def puthex(hdata):
     Uart.write(int2byte(hdata))
