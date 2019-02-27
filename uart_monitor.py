@@ -60,12 +60,7 @@ if __name__ == '__main__':
             if count > 0:
                 data = Ser.read(count)
                 if data != b'':
-                    #hexshow(data)
                     strshow(data)
-                    #for i in range(0,dl):
-                    #    a = (data[i]+1)
-                    #    a = int2byte(a);
-                    Ser.write(data)
 
     except KeyboardInterrupt:
         if Ser != None:
