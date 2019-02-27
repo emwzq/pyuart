@@ -38,32 +38,29 @@ def int2byte(din):
     data = din
     a = []
     while data != 0:
-        y = data % 256;
+        a.append(data % 256)
         data = data // 256;
-        a.append(y)
-    c = a[::-1]
-    b = bytes(c)
-    return b
+    return  (bytes(a[::-1]))
 
-
-if __name__ == '__main__':
-    Ser = serial.Serial("/dev/ttyUSB0",115200,timeout=1.5)
-    print (Ser)
-    if Ser.isOpen():
-       print("open success")
-    else:
-        print("open failed")
-
-    Ser.write(bytes(0x38,))
+#´ò¿ª´®¿Ú
+def uart_open():
     try:
-        while True:
-            count = Ser.inWaiting()
-            if count > 0:
-                data = Ser.read(count)
-                if data != b'':
-                    #strshow(data)
-                    hexshow(data)
+        Ser = serial.Serial("/dev/ttyUSB0",115200,timeout=1.0)
+        if Ser.isOpen():
+            print("open success")
+        else:
+            print("open failed")
+        return Ser
+    except:
+        print("Uart open failed");
 
-    except KeyboardInterrupt:
-        if Ser != None:
-            Ser.close()
+####################################################################
+Uart = uart_open();
+
+def puthex(hdata):
+    Uart.write(int2byte(hdata))
+
+def putstr(data):
+    bdata = bytes(data,'utf-8')
+    Uart.write(bdata)
+

@@ -4,9 +4,8 @@ def int2byte(din):
     data = din
     a = []
     while data != 0:
-        y = data % 256;
+        a.append(data % 256)
         data = data // 256;
-        a.append(y)
     c = a[::-1]
     b = bytes(c)
     return b
