@@ -25,7 +25,10 @@ def hexshow(data):
     #print (int_data)
 
 def strshow(data):
-    print (data.decode(),end='')
+    try:
+        print (data.decode(),end='')
+    except:
+        print ("Unknow string")
 
 ###################################################
 #
@@ -61,8 +64,8 @@ if __name__ == '__main__':
             if count > 0:
                 data = Ser.read(count)
                 if data != b'':
-                    #strshow(data)
-                    hexshow(data)
+                    #hexshow(data)
+                    strshow(data)
 
     except KeyboardInterrupt:
         if Ser != None:
