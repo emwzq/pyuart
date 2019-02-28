@@ -70,6 +70,7 @@ def spi_rd(a):
     getline()
 
 def send_file(file_name):
+    print(getstr())
     f = open(file_name,'rt')
     for line in f:
         putstr(line)
