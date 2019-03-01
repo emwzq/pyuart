@@ -49,29 +49,34 @@ def getline():
 def reg_wr(a,d):
     aa = '%02x' % a
     dd = '%02x' % d
+    Uart.flushInput()
     putstr('S ' + aa + ' ' + dd + '\n')
     getline()
 
 def reg_rd(a):
     aa = '%02x' % a
+    Uart.flushInput()
     putstr('G ' + aa +'\n')
     getline()
 
 def spi_wr(a,d):
     aa = '%02x' % a
     dd = '%02x' % d
-    putstr('w ' + aa + ' ' + dd + '\n')
+    Uart.flushInput()
+    putstr('W ' + aa + ' ' + dd + '\n')
     getline()
 
 
 def spi_rd(a):
     aa = '%02x' % a
-    putstr('r ' + aa +'\n')
+    Uart.flushInput()
+    putstr('R ' + aa +'\n')
     getline()
 
 def send_file(file_name):
     print(getstr())
     f = open(file_name,'rt')
+    Uart.flushInput()
     for line in f:
         putstr(line)
         getline()
